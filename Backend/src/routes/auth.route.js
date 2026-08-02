@@ -1,5 +1,5 @@
 import express from "express";
-import { authControllerLogin, authControllerRegister } from "../controllers/auth.controller.js";
+import { authControllerLogin, authControllerRegister, authControllerVerifyEmail } from "../controllers/auth.controller.js";
 import { authValidatorRegister, authValidatorLogin } from "../validators/auth.validator.js";
 
 const authRoute = express.Router();
@@ -20,5 +20,8 @@ authRoute.post("/register", authValidatorRegister, authControllerRegister);
  * @returns {JSON} - A JSON response indicating the success or failure of the login process, along with relevant messages and data.
  */
 authRoute.post("/login", authValidatorLogin, authControllerLogin);
+
+
+authRoute.get("/verify-email", authControllerVerifyEmail);
 
 export default authRoute;
