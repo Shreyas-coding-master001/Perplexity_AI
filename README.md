@@ -17,6 +17,7 @@ A full-stack AI-powered search assistant inspired by Perplexity. The project cur
 - dotenv for environment variables
 - Nodemailer for email delivery
 - Gmail OAuth2 mail configuration
+- Google Gemini / LangChain AI integration for chatbot responses
 - React/Vite or similar frontend (planned)
 
 ## Backend features
@@ -28,6 +29,8 @@ The backend now includes:
 - Email verification on registration
 - Nodemailer integration to send verification emails
 - Verification endpoint that marks the user as verified in the database
+- Gemini-powered chatbot integration using Google AI models
+- AI service layer for generating responses from Gemini
 
 ## Authentication flow
 
@@ -59,9 +62,10 @@ OAUTH_CLIENT_ID=your_google_oauth_client_id
 OAUTH_CLIENT_SECRET=your_google_oauth_client_secret
 OAUTH_REFREASH_TOKEN=your_google_refresh_token
 USER_EMAIL=your_email@gmail.com
+GEMINI_API_KEY=your_google_gemini_api_key
 ```
 
-> Note: the app currently expects Gmail-based OAuth credentials for the mail service.
+> Note: the app currently expects Gmail-based OAuth credentials for the mail service and a valid Google Gemini API key for the chatbot.
 
 ### 3. Run the server
 
@@ -73,10 +77,11 @@ The backend will start with nodemon for development.
 
 ## Current status
 
-The backend authentication flow is actively being developed and the email verification feature has been implemented. The frontend is still in the planning/scaffolding stage.
+The backend authentication flow is active, the email verification feature has been implemented, and Google Gemini has been integrated for chatbot responses. The frontend is still in the planning/scaffolding stage.
 
 ## Notes
 
 - Keep secrets out of source control using `.env`
 - Use the `.gitignore` file to avoid committing `node_modules` and local environment files
 - Make sure Gmail OAuth credentials are valid before testing email verification
+- Keep your Gemini API key secure and never commit it to version control

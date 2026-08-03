@@ -10,13 +10,9 @@ export const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-if(config.NODE_ENVIRONMENT === "development"){
-    app.use(morgan('tiny'));
-}else{
-    app.use(morgan('combined'));
-}
 app.use(cookieParser());
+
+config.NODE_ENVIRONMENT === "development"? app.use(morgan('dev')) : app.use(morgan('combined'));
 
 //Routes
 app.use("/api/auth", authRoute);

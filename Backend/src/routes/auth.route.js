@@ -1,6 +1,7 @@
 import express from "express";
-import { authControllerLogin, authControllerRegister, authControllerVerifyEmail } from "../controllers/auth.controller.js";
+import { authControllerLogin, authControllerRegister, authControllerVerifyEmail, getMeController } from "../controllers/auth.controller.js";
 import { authValidatorRegister, authValidatorLogin } from "../validators/auth.validator.js";
+import { checkAuth } from "../middleware/auth.middleware.js";
 
 const authRoute = express.Router();
 /**
@@ -23,5 +24,7 @@ authRoute.post("/login", authValidatorLogin, authControllerLogin);
 
 
 authRoute.get("/verify-email", authControllerVerifyEmail);
+
+authRoute.get("/get-me", checkAuth, getMeController);
 
 export default authRoute;

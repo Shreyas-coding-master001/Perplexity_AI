@@ -15,15 +15,17 @@ if(!process.env.OAUTH_CLIENT_ID) throw new Error("OAUTH_CLIENT_ID is not defined
 if(!process.env.OAUTH_CLIENT_SECRET) throw new Error("OAUTH_CLIENT_SECRET is not defined in Environment Variables");
 if(!process.env.OAUTH_REFREASH_TOKEN) throw new Error("OAUTH_REFREASH_TOKEN is not defined in Environment Variables");
 if(!process.env.USER_EMAIL) throw new Error("USER_EMAIL is not defined in Environment Variables");
+if(!process.env.GEMINI_API_KEY) throw new Error("GEMINI_API_KEY is not defined in Environment Variables");
 
 
 export const config = {
-    port : process.env.PORT,
-    NODE_ENVIRONMENT : process.env.NODE_ENVIRONMENT,
-    JWT_SECRET_KEY : process.env.JWT_SECRET_KEY,
-    MONGO_URI : process.env.MONGO_URI,
-    OAUTH_CLIENT_ID : process.env.OAUTH_CLIENT_ID,
+        port : process.env.PORT,
+        NODE_ENVIRONMENT : process.env.NODE_ENVIRONMENT,
+        JWT_SECRET_KEY : process.env.JWT_SECRET_KEY,
+        MONGO_URI : process.env.MONGO_URI,
+        OAUTH_CLIENT_ID : process.env.OAUTH_CLIENT_ID,
         OAUTH_CLIENT_SECRET : process.env.OAUTH_CLIENT_SECRET,
         OAUTH_REFREASH_TOKEN : process.env.OAUTH_REFREASH_TOKEN,
-        USER_EMAIL : process.env.USER_EMAIL
+        USER_EMAIL : process.env.USER_EMAIL,
+        GOOGLE_API_KEY : process.env.GEMINI_API_KEY
 };
