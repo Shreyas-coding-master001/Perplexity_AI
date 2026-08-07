@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import {config} from "./config/config.js";
+import helmet from "helmet";
 
 //Routes
 import authRoute from "./routes/auth.route.js";
@@ -11,6 +12,7 @@ export const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(helmet());
 
 config.NODE_ENVIRONMENT === "development"? app.use(morgan('dev')) : app.use(morgan('combined'));
 
