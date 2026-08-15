@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import {config} from "./config/config.js";
 import helmet from "helmet";
+import cors from "cors";
 
 //Routes
 import authRoute from "./routes/auth.route.js";
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet());
+app.use(cors());
 
 config.NODE_ENVIRONMENT === "development"? app.use(morgan('dev')) : app.use(morgan('combined'));
 

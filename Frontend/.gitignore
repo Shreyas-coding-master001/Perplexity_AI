@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+//enviroment variables
+.env
+.env/*
+Frontend/env
+Frontend/env/*
+
+/node_modules
