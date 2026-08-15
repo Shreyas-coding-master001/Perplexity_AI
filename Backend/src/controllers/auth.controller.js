@@ -79,7 +79,7 @@ export async function authControllerRegister(req, res){
         return res.status(201).json({
             success: true,
             message : "User Registered Successfully",
-            use: {
+            user: {
                 name: user.name,
                 email: user.email,
                 avatar: user.avatar,
