@@ -1,8 +1,6 @@
 import axios from "axios";
 import { API } from "../../../config/config.js";
 
-console.log(API);
-
 const api = axios.create({
     baseURL : API,
     withCredentials: true
@@ -29,7 +27,7 @@ export const login = async (data) => {
 
 export const getUser = async () => {
     try{
-        const resp = await api.get("/api/aut/get-me");
+        const resp = await api.get("/api/auth/get-me");
         return resp;
     }catch(error){
         throw new Error(error);

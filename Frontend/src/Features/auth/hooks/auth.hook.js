@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setError, setLoading, setUser } from "../auth.slice";
 import {register, login, getUser} from "../services/api.service.js";
 
@@ -27,7 +27,7 @@ function authHooks(){
 
             const resp = await login({email, password});
 
-            setUser(resp.data?.user);
+            dispact(setUser(resp.data?.user));
 
             return resp.data;
         }catch(error){

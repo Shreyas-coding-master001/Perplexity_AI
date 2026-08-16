@@ -1,16 +1,33 @@
-import React, { useState } from 'react'
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import {Navigate, useNavigate} from "react-router-dom";
 import authHook from "../hooks/auth.hook.js";
+import { useSelector } from 'react-redux';
 
 const Login = () => {
+  // 1. Initialize custom hooks and selectors first
+  const { handleLogin, handleGetUser } = authHook();
+  const user = useSelector(state => state.auth.user);
   const navigate = useNavigate();
 
-  const {handleLogin} = authHook();
-
+  // 2. Declare all useState hooks at the top level (moved from below the if statement)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-  })
+  });
+
+  // 3. Side effects (useEffect) go next
+  useEffect(() => {
+    async function callMe() {
+      // handleGetUser is now safely initialized above this block
+      const resp = await handleGetUser();
+    }
+    callMe();
+  }, []);
+
+  // 4. Conditional returns MUST come after ALL hook declarations
+  if (user) {
+    return <Navigate to="/dashborad" />
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,11 +41,9 @@ const Login = () => {
   const handleSubmit = async () => {
     const data = formData;
 
-    console.log(data);
-    
     const resp = await handleLogin(data);
 
-    navigate("/");
+    await navigate("/dashboard");
   }
 
   return (
