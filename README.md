@@ -1,57 +1,111 @@
 # Perplexity
 
-A full-stack AI-powered search assistant inspired by Perplexity. The project currently includes a backend API with authentication and email verification, plus a frontend folder for the user interface.
+Perplexity is a full-stack AI search assistant inspired by the Perplexity product experience. The project includes a Node.js/Express backend for authentication, email verification, and AI responses, plus a React + Vite frontend for user login, registration, and a protected dashboard flow.
 
-## Project structure
+## Overview
 
-- Backend/ - Express + MongoDB API with auth and mail features
-- Frontend/ - Client app (to be built)
-- TO-DO.md - task tracking notes
+This repository is structured as a monorepo-style project with two main parts:
 
-## Tech stack
+- Backend: Express server with MongoDB, JWT auth, email verification, and AI integration
+- Frontend: React + Vite app with Redux and React Router
 
+## Tech Stack
+
+### Backend
 - Node.js
-- Express
-- MongoDB with Mongoose
+- Express.js
+- MongoDB + Mongoose
 - JWT authentication
-- dotenv for environment variables
-- Nodemailer for email delivery
-- Gmail OAuth2 mail configuration
-- Google Gemini / LangChain AI integration for chatbot responses
-- React/Vite or similar frontend (planned)
+- Nodemailer
+- Socket.IO
+- Google Gemini via LangChain integration
+- dotenv
+- Helmet, CORS, cookie-parser, morgan
 
-## Backend features
+### Frontend
+- React
+- Vite
+- Redux Toolkit
+- React Router DOM
+- Axios
+- Socket.IO client
+- Tailwind CSS
 
-The backend now includes:
-
-- User registration
-- Login flow with JWT-based sessions
-- Email verification on registration
-- Nodemailer integration to send verification emails
-- Verification endpoint that marks the user as verified in the database
-- Gemini-powered chatbot integration using Google AI models
-- AI service layer for generating responses from Gemini
-
-## Authentication flow
-
-1. A user registers with name, email, and password.
-2. The backend creates the user and sends a verification email.
-3. The email contains a JWT link that hits the verification endpoint.
-4. The backend verifies the token and updates the user as verified.
-5. The user can then proceed with login and access protected features.
-
-## Getting started
-
-### 1. Install backend dependencies
+## Project Structure
 
 ```bash
-cd Backend
-npm install
+Perplexity/
+├── Backend/
+│   ├── src/
+│   │   ├── app.js
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── sockets/
+│   │   └── validators/
+│   ├── package.json
+│   ├── server.js
+│   └── .env
+├── Frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── index.html
+├── README.md
+├── TO-DO.md
+└── .gitignore
 ```
 
-### 2. Setup environment variables
+## Features
 
-Create a `.env` file in the `Backend` folder with the following values:
+### Backend
+- User registration with validation
+- User login with JWT-based authentication
+- Protected routes using middleware
+- Email verification flow
+- MongoDB user model and persistence
+- AI response generation through Google Gemini
+- CORS-enabled API for frontend access
+- Socket server setup for real-time communication
+
+### Frontend
+- Landing page
+- Login page
+- Register page
+- Protected dashboard route
+- Redux store for app state
+- React Router-based routing
+- Lazy-loaded pages via React Suspense
+
+## API Endpoints
+
+Base URL: `http://localhost:5000`
+
+### Auth Routes
+- `POST /api/auth/register` — register user
+- `POST /api/auth/login` — sign in user
+- `GET /api/auth/verify-email` — verify user email
+- `GET /api/auth/get-me` — fetch logged-in user details (protected)
+
+### Health Check
+- `GET /` — returns a welcome message
+
+## Prerequisites
+
+Before running the project, make sure you have:
+
+- Node.js 18+ installed
+- MongoDB running locally or a cloud MongoDB connection string
+- A Google account and valid Gmail OAuth credentials for email sending
+- A Google Gemini API key
+
+## Environment Setup
+
+Create a `.env` file inside the `Backend` directory with the following variables:
 
 ```env
 PORT=5000
@@ -65,23 +119,88 @@ USER_EMAIL=your_email@gmail.com
 GEMINI_API_KEY=your_google_gemini_api_key
 ```
 
-> Note: the app currently expects Gmail-based OAuth credentials for the mail service and a valid Google Gemini API key for the chatbot.
+> Keep this file private and do not commit it to source control.
 
-### 3. Run the server
+## Installation
+
+### 1. Install backend dependencies
 
 ```bash
+cd Backend
+npm install
+```
+
+### 2. Install frontend dependencies
+
+```bash
+cd Frontend
+npm install
+```
+
+## Run the Project
+
+### Start the backend
+
+```bash
+cd Backend
 npm run dev
 ```
 
-The backend will start with nodemon for development.
+The backend runs using `nodemon` and listens on the configured port.
 
-## Current status
+### Start the frontend
 
-The backend authentication flow is active, the email verification feature has been implemented, and Google Gemini has been integrated for chatbot responses. The frontend is still in the planning/scaffolding stage.
+```bash
+cd Frontend
+npm run dev
+```
+
+The frontend usually runs on:
+
+```bash
+http://localhost:5173
+```
+
+## Frontend Routing
+
+The app currently includes these routes:
+
+- `/` — landing page
+- `/login` — login screen
+- `/register` — registration screen
+- `/dashboard` — protected dashboard route
+
+If a user hits an unknown route, the app redirects to `/dashboard` by default.
+
+## Authentication Flow
+
+1. User signs up at `/register`
+2. The backend validates the data and creates the user
+3. A verification email is sent using Nodemailer
+4. The user clicks the verification link
+5. The backend verifies the email token and marks the account as verified
+6. User logs in at `/login`
+7. JWT token is issued and used to access protected routes
 
 ## Notes
 
-- Keep secrets out of source control using `.env`
-- Use the `.gitignore` file to avoid committing `node_modules` and local environment files
-- Make sure Gmail OAuth credentials are valid before testing email verification
-- Keep your Gemini API key secure and never commit it to version control
+- The project currently uses both a backend API and a React frontend.
+- Email verification requires valid Gmail OAuth configuration.
+- AI features depend on a valid Gemini API key.
+- Use `.gitignore` to prevent `.env` and dependency folders from being pushed to GitHub.
+
+## Current Status
+
+The project is in an active development state with core backend authentication and AI integration functioning, and frontend pages for auth/dashboard flow already scaffolded.
+
+## License
+
+This project is currently unlicensed unless otherwise specified in the repository.
+
+## Contributing
+
+Pull requests and improvements are welcome. If you plan to make changes:
+
+1. Create a feature branch
+2. Keep environment variables out of the repo
+3. Test backend and frontend flows before submitting
