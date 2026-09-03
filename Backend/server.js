@@ -1,7 +1,6 @@
 import {app} from "./src/app.js";
 import {config} from "./src/config/config.js";
 import connectDB from "./src/config/db.js";
-import { getModel } from "./src/services/ai.service.js";
 import {createServer} from "http";
 import { initServer } from "./src/sockets/server.socket.js";
 

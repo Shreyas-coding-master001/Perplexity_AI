@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema(
   {
+    chat: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chat",
+      required: true,
+    },
     content: {
       type: String,
       required: true,
@@ -10,8 +15,8 @@ const messageSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["user", "assistant"],
-      required: true,
       default: "user",
+      required: true,
     },
   },
   { timestamps: true }

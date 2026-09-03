@@ -7,6 +7,7 @@ import cors from "cors";
 
 //Routes
 import authRoute from "./routes/auth.route.js";
+import chatsRoute from "./routes/chat.routes.js";
 
 export const app = express();
 
@@ -23,6 +24,7 @@ config.NODE_ENVIRONMENT === "development"? app.use(morgan('dev')) : app.use(morg
 
 //Routes
 app.use("/api/auth", authRoute);
+app.use("/api/chats", chatsRoute);
 
 app.get("/", (req, res) => {
     res.status(200).json({

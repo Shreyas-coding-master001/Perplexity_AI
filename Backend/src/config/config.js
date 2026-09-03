@@ -16,6 +16,7 @@ if(!process.env.OAUTH_CLIENT_SECRET) throw new Error("OAUTH_CLIENT_SECRET is not
 if(!process.env.OAUTH_REFREASH_TOKEN) throw new Error("OAUTH_REFREASH_TOKEN is not defined in Environment Variables");
 if(!process.env.USER_EMAIL) throw new Error("USER_EMAIL is not defined in Environment Variables");
 if(!process.env.GEMINI_API_KEY) throw new Error("GEMINI_API_KEY is not defined in Environment Variables");
+if(!process.env.MISTRAL_API_KEY) throw new Error("MISTRAL_API_KEY is not defined in Environment Variables");
 
 
 export const config = {
@@ -27,5 +28,6 @@ export const config = {
         OAUTH_CLIENT_SECRET : process.env.OAUTH_CLIENT_SECRET,
         OAUTH_REFREASH_TOKEN : process.env.OAUTH_REFREASH_TOKEN,
         USER_EMAIL : process.env.USER_EMAIL,
-        GOOGLE_API_KEY : process.env.GEMINI_API_KEY
+        GOOGLE_API_KEY : process.env.GEMINI_API_KEY,
+        MISTRAL_API_KEY : process.env.MISTRAL_API_KEY
 };
